@@ -4,10 +4,10 @@ import pandas as pd
 # Inisialisasi file Excel jika belum ada
 excel_file = 'Input.xlsx'
 try:
-    df = pd.read_excel(excel_file)
+    df = pd.read_excel(excel_file, engine='openpyxl')
 except FileNotFoundError:
     df = pd.DataFrame(columns=['Tanggal', 'Nama Barang', 'Quantity', 'Bulan PO', 'Keterangan'])
-    df.to_excel(excel_file, index=False)
+    df.to_excel(excel_file, index=False, engine='openpyxl')
 
 # Judul aplikasi
 st.title('FORM INPUT BARANG')
@@ -33,7 +33,7 @@ if st.button('Submit'):
     df = pd.concat([df, new_data], ignore_index=True)
 
     # Menyimpan dataframe ke file Excel
-    df.to_excel(excel_file, index=False)
+    df.to_excel(excel_file, index=False, engine='openpyxl')
 
     # Menampilkan pesan sukses
     st.success('Data berhasil disimpan!')
